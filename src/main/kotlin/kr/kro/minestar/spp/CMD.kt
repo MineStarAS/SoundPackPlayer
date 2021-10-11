@@ -1,4 +1,4 @@
-package kr.kro.minestar.pack
+package kr.kro.minestar.spp
 
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -11,12 +11,10 @@ class CMD : CommandExecutor, TabCompleter {
     override fun onCommand(p: CommandSender, cmd: Command, label: String, args: Array<out String>): Boolean {
         if (p !is Player) return false
         if (args.isEmpty()) {
-            p.sendMessage("null")
+            SppClass().test(p)
         } else {
             when (args[0]) {
-                "cmd1" -> TODO()
-                "cmd2" -> TODO()
-                "cmd3" -> TODO()
+                args[0] -> SppClass().test1(p)
             }
         }
         return false
@@ -26,9 +24,6 @@ class CMD : CommandExecutor, TabCompleter {
         val list = mutableListOf<String>()
         if (args.size == 1) for (s in args0) if (s.contains(args[0])) list.add(s)
         if (args.size > 1) when (args[0]) {
-            "cmd1" -> TODO()
-            "cmd2" -> TODO()
-            "cmd3" -> TODO()
         }
 
         return list
