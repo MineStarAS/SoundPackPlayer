@@ -4,4 +4,4 @@ main: kr.kro.minestar.spp.Main
 api-version: 1.17
 authors: [ MineStar ]
 commands:
-  cmd:
+  spp:

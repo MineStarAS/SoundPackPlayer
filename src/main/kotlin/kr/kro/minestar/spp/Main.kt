@@ -12,7 +12,7 @@ class Main : JavaPlugin() {
     override fun onEnable() {
         pl = this
         logger.info("$prefix §aEnable")
-        getCommand("cmd")?.setExecutor(CMD())
+        getCommand("spp")?.setExecutor(CMD())
 
         if (!File(dataFolder, "config.yml").exists()) saveDefaultConfig()
     }
