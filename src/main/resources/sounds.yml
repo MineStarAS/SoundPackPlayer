@@ -1,0 +1,22 @@
+# This json file is for SPP(this plugin), and if you do not follow the form, some functions will cause an error.
+# 이 json 파일은 SPP용으로, 양식을 따르지 않을 경우 일부 기능에서 오류가 발생합니다.
+{
+  "sound.title.A": { # example start
+    "sounds": [ { "name": "folder1/folder2/sound.title.A" } ],
+    "composer": "folder1", # 작곡가 또는 출처
+    "category": "folder2", # 해당 사운드(음악) 장르
+    "subtitle": "원하는 타이틀 A"
+  },
+  "sound.title.B": {
+    "sounds": [
+      { "name": "folder1/folder2/sound.title.B-1" },
+      { "name": "folder1/folder2/sound.title.B-2" },
+      { "name": "folder1/folder2/sound.title.B-3" } # 랜덤 재생
+    ],
+    "composer": "folder1",
+    "category": "folder2",
+    "subtitle": "원하는 타이틀 B"
+  } # example end
+}
+# All comments must be removed before use.
+# 사용하기 전에 모든 주석을 제거해야 합니다.

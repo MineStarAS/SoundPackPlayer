@@ -14,7 +14,8 @@ class Main : JavaPlugin() {
         logger.info("$prefix §aEnable")
         getCommand("spp")?.setExecutor(CMD())
 
-        if (!File(dataFolder, "config.yml").exists()) saveDefaultConfig()
+//        if (!File(dataFolder, "config.yml").exists()) saveDefaultConfig()
+        if (!File(dataFolder, "sounds.yml").exists()) saveResource("sounds.yml", false)
     }
 
     override fun onDisable() {

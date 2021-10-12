@@ -1,4 +1,4 @@
-package kr.kro.minestar.spp
+package kr.kro.minestar.spp.functions
 
 import org.bukkit.entity.Player
 import net.kyori.adventure.sound.Sound
