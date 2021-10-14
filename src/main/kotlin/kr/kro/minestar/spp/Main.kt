@@ -1,6 +1,6 @@
 package kr.kro.minestar.spp
 
-import kr.kro.minestar.spp.data.PlayerOption
+import kr.kro.minestar.spp.functions.player.PlayerOption
 import kr.kro.minestar.spp.functions.AlwaysEvent
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player

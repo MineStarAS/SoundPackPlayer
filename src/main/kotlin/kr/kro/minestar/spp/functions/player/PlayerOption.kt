@@ -1,4 +1,4 @@
-package kr.kro.minestar.spp.data
+package kr.kro.minestar.spp.functions.player
 
 import kr.kro.minestar.spp.Main
 import kr.kro.minestar.spp.functions.SppClass
@@ -78,12 +78,15 @@ class PlayerOption(private val player: Player) {
         if (play && playType == PlayType.ONE_TIME) playOne()
     }
 
-    private fun playSound(): Boolean {
+    private fun playSound() {
         stopSound()
         val key = SppClass().getKeyFromSubtitle(playSound)
-        if (key == "") "$prefix null file".toPlayer(player).let { return false }
+        if (key == "") {
+            "$prefix null file".toPlayer(player)
+            cancelTask()
+        }
         player.playSound(player.location.add(0.0, 500.0, 0.0), key, SoundCategory.RECORDS, 1F, 1F)
-        return true
+        return
     }
 
     private fun stopSound() {
@@ -113,45 +116,44 @@ class PlayerOption(private val player: Player) {
         cancelTask()
         val time = SppClass().getOggTimeLength(SppClass().getFile(SppClass().getKeyFromSubtitle(playSound)))
         task = Bukkit.getScheduler().runTaskLater(Main.pl, Runnable {
-            "test1".toPlayer(player)
             if (!loop) return@Runnable
             playOneLoop()
             playSound()
-            "test2".toPlayer(player)
         }, time.toTick() + 20L)
     }
 
     /**
      * 재생목록을 재생합니다.
      */
-    private fun playList(isLoop : Boolean) {
+    private fun playList(isLoop: Boolean) {
         cancelTask()
         if (playList.isEmpty()) {
             "$prefix §c재생목록이 비어있습니다.".toPlayer(player)
             togglePlay()
             return
         }
-        if(isLoop) setShuffleNumber()
+        if (!isLoop) setShuffleNumber()
         val l1 = playList
         val l2 = shuffleNumber
         setSound(l1[l2[0]])
         playSound()
         playList(0, l1, l2)
-        "$prefix §aplay §e§l$playSound".toPlayer(player)
+        "$prefix §aPlay §e§l$playSound".toPlayer(player)
     }
 
     private fun playList(count: Int, l1: List<String>, l2: List<Int>) {
         if (count == l1.size) {
             if (loop) playList(true).let { return }
             else cancelTask().let { return }
+        } else {
+            val time = SppClass().getOggTimeLength(SppClass().getFile(SppClass().getKeyFromSubtitle(playSound)))
+            task = Bukkit.getScheduler().runTaskLater(Main.pl, Runnable {
+                if (count + 1 != l1.size) setSound(l1[l2[count + 1]])
+                playSound()
+                playList(count + 1, l1, l2)
+                "$prefix §aPlay §e§l$playSound".toPlayer(player)
+            }, time.toTick() + 20L)
         }
-        val time = SppClass().getOggTimeLength(SppClass().getFile(SppClass().getKeyFromSubtitle(playSound)))
-        task = Bukkit.getScheduler().runTaskLater(Main.pl, Runnable {
-            setSound(l1[l2[count + 1]])
-            playSound()
-            playList(count + 1, l1, l2)
-            "$prefix §aplay §e§l$playSound".toPlayer(player)
-        }, time.toTick() + 20L)
     }
 
     /**
@@ -220,6 +222,14 @@ class PlayerOption(private val player: Player) {
         "$prefix §9$subtitle §f을/를 재생목록에 §a추가 §f하였습니다.".toPlayer(player)
     }
 
+    fun addPlayListAll() {
+        for (subtitle in SppClass().getSubtitleList()) if (!playList.contains(subtitle)) {
+            playList.add(subtitle)
+            "$prefix §9$subtitle §f을/를 재생목록에 §a추가 §f하였습니다.".toPlayer(player)
+        }
+        save()
+    }
+
     fun removePlayList() {
         if (!playList.contains(playSound)) "$prefix §c재생목록에 추가되어 있지 않습니다.".toPlayer(player).let { return }
         playList.remove(playSound)
@@ -232,6 +242,13 @@ class PlayerOption(private val player: Player) {
         playList.remove(subtitle)
         save()
         "$prefix §9$playSound §f을/를 재생목록에서 §c제거 §f하였습니다.".toPlayer(player)
+    }
+
+    fun clearPlayList() {
+        playList.clear()
+        save()
+        "$prefix §9모든 곡§f을 재생목록에서 §c제거 §f하였습니다.".toPlayer(player)
+        if (play && playType == PlayType.LIST) togglePlay()
     }
 
     fun getPlayList(): MutableList<String> {
