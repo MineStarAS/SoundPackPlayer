@@ -1,6 +1,9 @@
 package kr.kro.minestar.spp
 
 import kr.kro.minestar.spp.functions.SppClass
+import kr.kro.minestar.spp.functions.removeUnderBar
+import kr.kro.minestar.spp.functions.setUnderBar
+import kr.kro.minestar.spp.functions.toPlayer
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -9,23 +12,34 @@ import org.bukkit.entity.Player
 
 class CMD : CommandExecutor, TabCompleter {
     private val prefix = Main.prefix
-    private val args0 = listOf("check", "length1", "length2")
+    private val args0 = listOf("play", "playlist", "shuffle", "loop", "select", "add", "remove")
     override fun onCommand(player: CommandSender, cmd: Command, label: String, args: Array<out String>): Boolean {
         if (player !is Player) return false
         if (args.isEmpty()) {
         } else {
+            val option = Main.poMap[player]!!
             when (args[0]) {
-                args0[0] -> {
-                    if (args.size == 2) SppClass().getSoundAddress(args[1])?.toPlayer(player)
-                    else "$prefix §c/${cmd.name} ${args[0]} <SoundKey>".toPlayer(player)
+                args0[0] -> option.togglePlay()
+                args0[1] -> option.togglePlayType()
+                args0[2] -> option.toggleShuffle()
+                args0[3] -> option.toggleLoop()
+
+                args0[4] -> {
+                    if (args.size == 2) option.selectSound(args[1].removeUnderBar())
+                    else "$prefix §c/${cmd.name} ${args[0]} <SoundName>".toPlayer(player)
                 }
-                args0[1] -> {
+                args0[5] -> {
+                    when (args.size) {
+                        1 -> option.addPlayList()
+                        2 -> option.addPlayList(args[1].removeUnderBar())
+                        else -> "$prefix §c/${cmd.name} ${args[0]} [SoundName]".toPlayer(player)
+                    }
                 }
-                args0[2] -> {
-                    for (key in SppClass().getSoundList()) {
-                        key.toString().toServer()
-                        SppClass().getOggTimeLength(SppClass().getFile(key.toString())).toTime().toServer()
-                        " ".toServer()
+                args0[6] -> {
+                    when (args.size) {
+                        1 -> option.removePlayList()
+                        2 -> option.removePlayList(args[1].removeUnderBar())
+                        else -> "$prefix §c/${cmd.name} ${args[0]} [SoundName]".toPlayer(player)
                     }
                 }
             }
@@ -33,11 +47,12 @@ class CMD : CommandExecutor, TabCompleter {
         return false
     }
 
-    override fun onTabComplete(p: CommandSender, cmd: Command, alias: String, args: Array<out String>): MutableList<String> {
+    override fun onTabComplete(player: CommandSender, cmd: Command, alias: String, args: Array<out String>): MutableList<String> {
         val list = mutableListOf<String>()
         if (args.size == 1) for (s in args0) if (s.contains(args[0])) list.add(s)
         if (args.size >= 2) when (args[0]) {
-            args0[0], args0[1], args0[2] -> for (s in SppClass().getSoundList()) if (s.toString().contains(args[1])) list.add(s.toString())
+            args0[4], args0[5] -> for (s in SppClass().getSubtitleList()) if (s.setUnderBar().contains(args[1])) list.add(s.setUnderBar())
+            args0[6] -> for (s in Main.poMap[player]!!.getPlayList()) if (s.setUnderBar().contains(args[1])) list.add(s.setUnderBar())
         }
 
         return list

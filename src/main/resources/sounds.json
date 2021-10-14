@@ -1,0 +1,14 @@
+{
+  "sound.title.A": {
+    "sounds": [ { "name": "folder1/folder2/sound.title.A" } ],
+    "subtitle": "원하는 타이틀 A"
+  },
+  "sound.title.B": {
+    "sounds": [
+      { "name": "folder1/folder2/sound.title.B-1" },
+      { "name": "folder1/folder2/sound.title.B-2" },
+      { "name": "folder1/folder2/sound.title.B-3" }
+    ],
+    "subtitle": "원하는 타이틀 B"
+  }
+}

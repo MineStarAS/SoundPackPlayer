@@ -1,6 +1,5 @@
-package kr.kro.minestar.spp
+package kr.kro.minestar.spp.functions
 
-import io.papermc.paper.event.server.ServerResourcesReloadedEvent
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
@@ -19,6 +18,14 @@ fun String.toPlayers(players: Collection<Player>) {
 
 fun String.toComponent(): Component {
     return Component.text(this)
+}
+
+fun String.setUnderBar(): String {
+    return this.replace(' ', '_')
+}
+
+fun String.removeUnderBar(): String {
+    return this.replace('_', ' ')
 }
 
 fun Int.toTick(): Int {
