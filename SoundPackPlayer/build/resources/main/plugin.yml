@@ -1,0 +1,7 @@
+name: SoundPackPlayer
+version: 1.0.0
+main: kr.kro.minestar.soundpackplayer.Main
+api-version: 1.18
+authors: [ MineStar ]
+commands:
+  spp:

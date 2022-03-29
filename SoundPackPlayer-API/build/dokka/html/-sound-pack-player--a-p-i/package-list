@@ -1,0 +1,7 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:kr.kro.minestar.soundpackplayer.api////PointingToDeclaration/-sound-pack-player--a-p-i/kr.kro.minestar.soundpackplayer.api/index.html
+$dokka.location:kr.kro.minestar.soundpackplayer.api/SoundPackPlayerOpenGUI///PointingToDeclaration/-sound-pack-player--a-p-i/kr.kro.minestar.soundpackplayer.api/-sound-pack-player-open-g-u-i/index.html
+$dokka.location:kr.kro.minestar.soundpackplayer.api/SoundPackPlayerOpenGUI/soundPlayer/#org.bukkit.entity.Player/PointingToDeclaration/-sound-pack-player--a-p-i/kr.kro.minestar.soundpackplayer.api/-sound-pack-player-open-g-u-i/sound-player.html
+kr.kro.minestar.soundpackplayer.api
+

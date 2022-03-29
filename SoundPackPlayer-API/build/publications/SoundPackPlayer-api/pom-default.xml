@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <!-- This module was also published with a richer model, Gradle metadata,  -->
+  <!-- which should be used instead. Do not delete the following line which  -->
+  <!-- is to indicate to Gradle or any Gradle module metadata file consumer  -->
+  <!-- that they should prefer consuming it instead. -->
+  <!-- do_not_remove: published-with-gradle-metadata -->
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>kr.kro.minestar</groupId>
+  <artifactId>SoundPackPlayer-API</artifactId>
+  <version>1.0.0</version>
+  <name>SoundPackPlayer</name>
+  <description>This is MineStar's SoundPackPlayer plugin</description>
+  <url>https://github.com/MineStarAS/SoundPackPlayer</url>
+  <licenses>
+    <license>
+      <name>GNU GENERAL PUBLIC LICENSE Version 3</name>
+      <url>https://www.gnu.org/licenses/gpl-3.0.txt</url>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>MineStarAS</id>
+      <name>MineStar</name>
+      <email>band1019@naver.com</email>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:https://github.com/MineStarAS/SoundPackPlayer.git</connection>
+    <developerConnection>scm:git:https://github.com/MineStarAS/SoundPackPlayer.git</developerConnection>
+    <url>https://github.com/MineStarAS/SoundPackPlayer.git</url>
+  </scm>
+  <dependencies>
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-stdlib</artifactId>
+      <version>1.6.10</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.reflections</groupId>
+      <artifactId>reflections</artifactId>
+      <version>0.10.2</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.projecttl</groupId>
+      <artifactId>project-economy-api</artifactId>
+      <version>2.1.3</version>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
+</project>
