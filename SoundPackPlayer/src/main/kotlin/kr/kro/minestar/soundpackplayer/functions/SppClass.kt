@@ -1,6 +1,6 @@
-package kr.kro.minestar.spp.functions
+package kr.kro.minestar.soundpackplayer.functions
 
-import kr.kro.minestar.spp.Main
+import kr.kro.minestar.soundpackplayer.Main
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import java.io.BufferedReader
@@ -10,14 +10,14 @@ import java.io.InputStreamReader
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
-class SppClass {
-    val path = Main.pl.dataFolder.canonicalPath + "\\"
+object SppClass {
+    val path = Main.pl.dataFolder.canonicalPath + "/"
     val soundsFile = File(Main.pl.dataFolder, "sounds.json")
 
     /**
      * sounds.json을 JSONObject 클래스로 가져옵니다.
      */
-    fun getJson(): JSONObject {
+    private fun getJson(): JSONObject {
         val parser = JSONParser()
         val reader = BufferedReader(InputStreamReader(FileInputStream(path + "sounds.json"), "UTF-8"))
         val obj = parser.parse(reader)
@@ -29,7 +29,7 @@ class SppClass {
     /**
      * jsonObject 의 key 목록을 가져옵니다.
      */
-    fun getKeyList(): List<Any?> {
+    private fun getKeyList(): List<Any?> {
         if (!soundsFile.exists()) return listOf()
         val jsonObject = getJson()
         return jsonObject.keys.toList()
@@ -38,7 +38,7 @@ class SppClass {
     /**
      * key를 이용해 subtitle을 가져옵니다.
      */
-    fun getSubtitle(key: String): String {
+    private fun getSubtitle(key: String): String {
         val jsonObject = getJson()
         val m = jsonObject[key] ?: return "null"
         val m1 = m as Map<String, *>
@@ -48,7 +48,7 @@ class SppClass {
     /**
      * subtitle 목록을 가져옵니다.
      */
-    fun getSubtitleList(): List<String> {
+    fun subtitleList(): List<String> {
         val list = mutableListOf<String>()
         for (key in getKeyList()) list.add(getSubtitle(key.toString()))
         return list
@@ -68,25 +68,23 @@ class SppClass {
         val m = jsonObject[key] ?: return "null"
         val m1 = m as Map<String, *>
         val m2 = m1["sounds"] as List<*>
-        val m3 = m2[0] as Map<String, *>
+        val m3 = m2.first() as Map<String, *>
         return m3["name"].toString()
     }
 
     /**
      * key를 이용해 파일 주소를 가져온 후, 파일 주소에 있는 파일을 가져옵니다.
      */
-    fun getFile(key: String): File? {
-        val address = "sounds/" + getSoundAddress(key) + ".ogg"
-        val file = File(Main.pl.dataFolder, address)
-        return if (file.exists()) file
-        else null
+    fun getFile(key: String): File {
+        val address = "sounds/${getSoundAddress(key)}.ogg"
+        return File(Main.pl.dataFolder, address)
     }
 
     /**
      * OGG파일의 재생길이를 가져옵니다.
      */
-    fun getOggTimeLength(oggFile: File?): Int {
-        if (oggFile == null) return 0
+    fun getOggTimeLength(oggFile: File): Int {
+        if (!oggFile.exists()) return 0
         var rate = -1
         var length = -1
         val size = oggFile.length().toInt()

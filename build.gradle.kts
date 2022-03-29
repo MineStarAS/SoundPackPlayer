@@ -1,65 +1,44 @@
 plugins {
-    kotlin("jvm") version "1.5.31"
-    id("com.github.johnrengelman.shadow") version "7.0.0"
-    `maven-publish`
+    kotlin("jvm") version "1.6.10"
+    id("com.github.johnrengelman.shadow") version "7.1.0"
 }
 
 group = "kr.kro.minestar"
 version = "1.0.0"
 
-repositories {
-    mavenCentral()
-    maven("https://papermc.io/repo/repository/maven-public/")
-    maven(url = "https://oss.sonatype.org/content/repositories/snapshots/") {
-        name = "sonatype-oss-snapshots"
+allprojects {
+    apply(plugin = "org.jetbrains.kotlin.jvm")
+    apply(plugin = "com.github.johnrengelman.shadow")
+
+    repositories {
+        mavenCentral()
     }
-    maven(url = "https://jitpack.io/")
-}
 
-dependencies {
-    implementation(kotlin("stdlib"))
-    implementation("net.kyori:adventure-api:4.7.0")
-    compileOnly("io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT")
-
-    implementation("org.reflections:reflections:0.9.12")
-
-    //project_TL
-
-    //MineStar
-}
-
-tasks{
-    compileKotlin{
-        kotlinOptions.jvmTarget = "16"
-    }
-    processResources {
-        filesMatching("*.yml") {
-            expand(project.properties)
-        }
-    }
-    create<Jar>("sourcesJar") {
-        archiveClassifier.set("source")
-        from(sourceSets["main"].allSource)
-    }
-    shadowJar {
-        archiveBaseName.set(project.name)
-        archiveClassifier.set("")
-        archiveVersion.set(project.version.toString())
-        doLast {
-            // jar file copy
-            copy {
-                from(archiveFile)
-                val plugins = File("C:\\Users\\MineStar\\Desktop\\MC Server folder\\MCserver 1.17.1 - vanilla\\plugins")
-                into(if (File(plugins, archiveFileName.get()).exists()) plugins else plugins)
-            }
-        }
+    java {
+        toolchain.languageVersion.set(JavaLanguageVersion.of(17))
     }
 }
-publishing {
-    publications {
-        create<MavenPublication>(project.name) {
-            artifact(tasks["sourcesJar"])
-            from(components["java"])
+
+subprojects {
+    repositories {
+        mavenCentral()
+        maven("https://papermc.io/repo/repository/maven-public/")
+        maven(url = "https://oss.sonatype.org/content/repositories/snapshots/") {
+            name = "sonatype-oss-snapshots"
         }
+        maven("https://repo.projecttl.net/repository/maven-public/")
+    }
+
+    dependencies {
+        implementation(kotlin("stdlib"))
+        compileOnly("net.kyori:adventure-api:4.10.1")
+        compileOnly("io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT")
+        compileOnly("com.arcaniax:HeadDatabase-API:1.3.1")
+        implementation("org.reflections:reflections:0.10.2")//패키지
+
+        //project_TL
+
+        //MineStar
+        implementation("kr.kro.minestar:Utility-API:1.6.3")
     }
 }
