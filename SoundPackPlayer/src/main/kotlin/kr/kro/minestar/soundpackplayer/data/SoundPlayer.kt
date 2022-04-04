@@ -53,6 +53,7 @@ class SoundPlayer(val player: Player) {
             val config = pl.config
 
             data["playing"] = config.getString("DEFAULT_BGM_SUBTITLE")
+            data["autoStart"] = false
             data["listPlay"] = true
             data["loop"] = true
             val list = mutableListOf<String>()
@@ -76,7 +77,9 @@ class SoundPlayer(val player: Player) {
         }
 
         playList = list
-        Bukkit.getScheduler().runTaskLater(pl, Runnable { play() }, 5 * 20)
+        Bukkit.getScheduler().runTaskLater(pl, Runnable {
+            if (isAutoStart()) play()
+        }, 5 * 20)
         DataClass.registerSoundPlayer(this)
     }
 
@@ -217,6 +220,16 @@ class SoundPlayer(val player: Player) {
         val list = mutableListOf<String>()
         for (soundData in playList) list.add(soundData.subtitle)
         return list.toList()
+    }
+
+    /**
+     * Sound Auto Start
+     */
+    fun isAutoStart() = data.getBoolean("autoStart")
+
+    fun autoStartToggle() {
+        data["autoStart"] = !isAutoStart()
+        data.save(file)
     }
 
     /**

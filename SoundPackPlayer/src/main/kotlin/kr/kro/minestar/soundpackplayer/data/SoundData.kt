@@ -6,6 +6,7 @@ import kr.kro.minestar.utility.item.addLore
 import kr.kro.minestar.utility.item.display
 import kr.kro.minestar.utility.material.item
 import kr.kro.minestar.utility.string.toPlayer
+import kr.kro.minestar.utility.string.toPlayerActionBar
 import net.kyori.adventure.sound.Sound
 import net.kyori.adventure.sound.SoundStop
 import org.bukkit.SoundCategory
@@ -27,14 +28,14 @@ class SoundData(val subtitle: String) {
     fun play(player: Player) {
         player.stopSound(SoundStop.source(Sound.Source.RECORD))
         player.playSound(player.location.add(0.0, 500.0, 0.0), key, SoundCategory.RECORDS, 1F, 1F)
-        "$prefix §aPlay §e$subtitle".toPlayer(player)
+        "§aPlay §e$subtitle".toPlayerActionBar(player)
     }
 
     fun play(players: Collection<Player>) {
         for (player in players) {
             player.stopSound(SoundStop.source(Sound.Source.RECORD))
             player.playSound(player.location.add(0.0, 500.0, 0.0), key, SoundCategory.RECORDS, 1F, 1F)
-            "$prefix §aPlay §e$subtitle".toPlayer(player)
+            "§aPlay §e$subtitle".toPlayerActionBar(player)
         }
     }
 }

@@ -1,7 +1,7 @@
 group = "kr.kro.minestar"
 version = "1.0.0"
 
-val plugins = File("C:\\Users\\MineStar\\Desktop\\MC Server folder\\MCserver 1.18.1 - MineFarmWorld\\plugins")
+val plugins = File("C:\\Users\\MineStar\\Desktop\\MC Server folder\\MCserver 1.18.2 - MineFarmWorld\\plugins")
 
 tasks {
     compileKotlin{

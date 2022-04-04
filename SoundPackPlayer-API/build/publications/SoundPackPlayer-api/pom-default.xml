@@ -44,9 +44,9 @@
       <scope>runtime</scope>
     </dependency>
     <dependency>
-      <groupId>net.projecttl</groupId>
-      <artifactId>project-economy-api</artifactId>
-      <version>2.1.3</version>
+      <groupId>kr.kro.minestar</groupId>
+      <artifactId>Utility-API</artifactId>
+      <version>1.0.0</version>
       <scope>runtime</scope>
     </dependency>
   </dependencies>

@@ -64,10 +64,10 @@
           }
         },
         {
-          "group": "net.projecttl",
-          "module": "project-economy-api",
+          "group": "kr.kro.minestar",
+          "module": "Utility-API",
           "version": {
-            "requires": "2.1.3"
+            "requires": "1.0.0"
           }
         }
       ],
@@ -95,11 +95,11 @@
         {
           "name": "SoundPackPlayer-API-1.0.0-all.jar",
           "url": "SoundPackPlayer-API-1.0.0-all.jar",
-          "size": 2697335,
-          "sha512": "2eef0ec7f6fa55295258d28fe1f41bffcb9a0f9e7724fb66fcea9a2e7ee885efdba9948aa990bb88feb79e3f613ab51906e3f0690ad727dc928a06130c45fac7",
-          "sha256": "2b5cd2d7010a07dd980b0ac477091b667324db66895d70b66b17b126d656c09d",
-          "sha1": "ce442c20da1ff7b24a45dda9e825acacd6c8af72",
-          "md5": "e28178866dc6949b7f37651f7d96e347"
+          "size": 2747335,
+          "sha512": "666774f8d4fa8bdb377d7707d7cdb9daaaa4b6895dce602cb8a49509a385aa50501797975bec0b8a3714d8d5968a087b4cecd98483b25ec775cc3e78eaa4b199",
+          "sha256": "b4d4f1d5840ca7d8ce3545f75760c7c1c76646e603fe33761f5fd5b81bc71cae",
+          "sha1": "00546c10f301b6a6959943c8eb7c540d66641389",
+          "md5": "ef0ac86d12b88d419ae60eaf3c851bdb"
         }
       ]
     }

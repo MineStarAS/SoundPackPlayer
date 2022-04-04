@@ -32,13 +32,13 @@ subprojects {
     dependencies {
         implementation(kotlin("stdlib"))
         compileOnly("net.kyori:adventure-api:4.10.1")
-        compileOnly("io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT")
+        compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
         compileOnly("com.arcaniax:HeadDatabase-API:1.3.1")
         implementation("org.reflections:reflections:0.10.2")//패키지
 
         //project_TL
 
         //MineStar
-        implementation("kr.kro.minestar:Utility-API:1.6.3")
+        implementation("kr.kro.minestar:Utility-API:1.0.0")
     }
 }

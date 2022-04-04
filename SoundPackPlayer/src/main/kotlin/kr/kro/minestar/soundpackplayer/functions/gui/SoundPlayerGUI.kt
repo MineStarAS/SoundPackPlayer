@@ -33,6 +33,10 @@ class SoundPlayerGUI(val soundPlayer: SoundPlayer) : GUI {
         head(9394).display("§c[§f한 곡 재생§c]"),
         head(9934).display("§a[§f재생목록 재생§a]"),
     )
+    val autoStart = listOf(
+        head(9405).display("§c[§f접속 시 자동 재생§c]"),
+        head(9945).display("§a[§f접속 시 자동 재생§a]"),
+    )
     val loop = listOf(
         head(9329).display("§9[§f반복재생§9] §f: §cOFF"),
         head(9330).display("§9[§f반복재생§9] §f: §cOFF"),
@@ -75,6 +79,10 @@ class SoundPlayerGUI(val soundPlayer: SoundPlayer) : GUI {
         gui.clear()
         gui.setItem(9 * 2, soundList)
         gui.setItem(9 * 2 + 1, shuffle)
+
+        if (soundPlayer.isAutoStart()) gui.setItem(9 * 2 + 2, autoStart.last())
+        else gui.setItem(9 * 2 + 2, autoStart.first())
+
         gui.setItem(9 * 2 + 3, previous)
 
         if (soundPlayer.isPlaying()) gui.setItem(9 * 2 + 4, play.last())
@@ -126,6 +134,7 @@ class SoundPlayerGUI(val soundPlayer: SoundPlayer) : GUI {
                     if (soundPlayer.isPlaying()) soundPlayer.stop(true)
                     else soundPlayer.play()
                 }
+                if (autoStart.contains(item)) soundPlayer.autoStartToggle()
                 if (listPlay.contains(item)) soundPlayer.listPlayToggle()
                 if (loop.contains(item)) soundPlayer.loopToggle()
             }
